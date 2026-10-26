@@ -1,0 +1,241 @@
+`timescale 1ns/1ps
+// Binary32 fused multiply-add reference DUT.
+// Exact finite accumulator uses a 560-bit integer at scale 2^-298.
+// This favors transparent correctness over area/timing; optimize only after equivalence tests.
+module fp32_fma_ieee #(parameter ID_W=16) (
+ input wire clk, input wire rst_n,
+ input wire in_valid, output wire in_ready,
+ input wire [ID_W-1:0] in_id,
+ input wire [31:0] a, input wire [31:0] b, input wire [31:0] z,
+ output wire out_valid, input wire out_ready,
+ output wire [ID_W-1:0] out_id,
+ output reg [31:0] result,
+ output reg flag_invalid, output reg flag_divzero,
+ output reg flag_overflow, output reg flag_underflow,
+ output reg flag_inexact
+);
+ localparam [31:0] QNAN = 32'h7fc00000;
+ wire [23:0] sig_a = (a[30:23] == 0) ? {1'b0,a[22:0]} : {1'b1,a[22:0]};
+ wire [23:0] sig_b = (b[30:23] == 0) ? {1'b0,b[22:0]} : {1'b1,b[22:0]};
+ wire mul_ready, mul_valid;
+ wire [ID_W-1:0] mul_id;
+ wire [47:0] product;
+ fp32_sigmul_linear4 #(.ID_W(ID_W)) u_mul(
+  .clk(clk),.rst_n(rst_n),.in_valid(in_valid),.in_ready(mul_ready),
+  .in_id(in_id),.sig_a(sig_a),.sig_b(sig_b),
+  .out_valid(mul_valid),.out_ready(out_ready),.out_id(mul_id),.product(product)
+ );
+ assign in_ready=mul_ready;
+ assign out_valid=mul_valid;
+ assign out_id=mul_id;
+
+ // Sideband registers have the same elastic advance conditions as the product pipeline.
+ reg v0,v1,v2;
+ reg [31:0] a0,a1,a2,b0,b1,b2,z0,z1,z2, ao,bo,zo;
+ wire r3=!mul_valid||out_ready, r2=!v2||r3, r1=!v1||r2, r0=!v0||r1;
+ always @(posedge clk) begin
+  if(!rst_n) begin
+   v0<=0;v1<=0;v2<=0; a0<=0;a1<=0;a2<=0;b0<=0;b1<=0;b2<=0;
+   z0<=0;z1<=0;z2<=0;ao<=0;bo<=0;zo<=0;
+  end else begin
+   if(r3 && v2) begin ao<=a2;bo<=b2;zo<=z2; end
+   if(r2) begin v2<=v1; if(v1) begin a2<=a1;b2<=b1;z2<=z1;end end
+   if(r1) begin v1<=v0; if(v0) begin a1<=a0;b1<=b0;z1<=z0;end end
+   if(r0) begin v0<=in_valid; if(in_valid) begin a0<=a;b0<=b;z0<=z;end end
+  end
+ end
+
+ function automatic signed [10:0] lsb_exp(input [31:0] x);
+  begin
+   if(x[30:23]==0) lsb_exp=-11'sd149;
+   else lsb_exp=$signed({3'b000,x[30:23]})-11'sd150;
+  end
+ endfunction
+ function automatic [23:0] sig24(input [31:0] x);
+  begin sig24=(x[30:23]==0)?{1'b0,x[22:0]}:{1'b1,x[22:0]}; end
+ endfunction
+ function automatic is_nan(input [31:0] x);
+  begin is_nan=(x[30:23]==8'hff)&&(x[22:0]!=0); end
+ endfunction
+ function automatic is_snan(input [31:0] x);
+  begin is_snan=is_nan(x)&&!x[22]; end
+ endfunction
+ function automatic is_inf(input [31:0] x);
+  begin is_inf=(x[30:23]==8'hff)&&(x[22:0]==0); end
+ endfunction
+ function automatic is_zero(input [31:0] x);
+  begin is_zero=(x[30:0]==0); end
+ endfunction
+ function automatic [3:0] local_high16(input [15:0] x);
+  begin
+   casez (x)
+    16'b1???????????????: local_high16 = 4'd15;
+    16'b01??????????????: local_high16 = 4'd14;
+    16'b001?????????????: local_high16 = 4'd13;
+    16'b0001????????????: local_high16 = 4'd12;
+    16'b00001???????????: local_high16 = 4'd11;
+    16'b000001??????????: local_high16 = 4'd10;
+    16'b0000001?????????: local_high16 = 4'd9;
+    16'b00000001????????: local_high16 = 4'd8;
+    16'b000000001???????: local_high16 = 4'd7;
+    16'b0000000001??????: local_high16 = 4'd6;
+    16'b00000000001?????: local_high16 = 4'd5;
+    16'b000000000001????: local_high16 = 4'd4;
+    16'b0000000000001???: local_high16 = 4'd3;
+    16'b00000000000001??: local_high16 = 4'd2;
+    16'b000000000000001?: local_high16 = 4'd1;
+    16'b0000000000000001: local_high16 = 4'd0;
+    default: local_high16 = 4'd0;
+   endcase
+  end
+ endfunction
+ function automatic [559:0] sticky_mag(input [559:0] m, input integer n);
+  integer k; reg s;
+  begin s=0; for(k=0;k<560;k=k+1) if(k<n) s=s|m[k]; sticky_mag={559'd0,s}; end
+ endfunction
+
+
+ reg [559:0] p_mag, z_mag;
+ reg signed [559:0] p_signed, z_signed, exact_sum;
+ reg [559:0] abs_sum;
+ reg [559:0] shifted;
+ reg [24:0] rounded;
+ reg [23:0] sig24_round;
+ reg [7:0] exp_field;
+ reg [22:0] frac_field;
+ reg sign_result;
+ reg sum_sign;
+ integer ep, ez, pshift, zshift, h, rshift, exponent_unbiased;
+ reg guard_bit, round_bit, sticky_bit, inexact_bit;
+ reg invalid_bit, overflow_bit, underflow_bit;
+ reg a_nan,b_nan,z_nan,a_inf,b_inf,z_inf,a_zero,b_zero,z_zero;
+ reg product_inf, exact_zero;
+ integer i;
+ wire product_sign = ao[31] ^ bo[31];
+
+ // PROCESS 1: exact finite arithmetic only. Keeping this process independent
+ // from IEEE classification and rounding reduces Yosys process-conversion complexity.
+ always @* begin
+  ep = $signed(lsb_exp(ao)) + $signed(lsb_exp(bo));
+  ez = $signed(lsb_exp(zo));
+  pshift = ep + 298;
+  zshift = ez + 298;
+  p_mag = 560'd0;
+  z_mag = 560'd0;
+  if (pshift >= 0 && pshift < 560)
+    p_mag = ({512'd0, product} << pshift);
+  if (zshift >= 0 && zshift < 560)
+    z_mag = ({536'd0, sig24(zo)} << zshift);
+  if (product_sign)
+    p_signed = -$signed(p_mag);
+  else
+    p_signed = $signed(p_mag);
+  if (zo[31])
+    z_signed = -$signed(z_mag);
+  else
+    z_signed = $signed(z_mag);
+  exact_sum = p_signed + z_signed;
+  sum_sign = exact_sum[559];
+  if (exact_sum[559])
+    abs_sum = -exact_sum;
+  else
+    abs_sum = exact_sum;
+  exact_zero = (abs_sum == 560'd0);
+ end
+
+ // PROCESS 2: special-value classification, normalization, rounding and flags.
+ // No arithmetic for the 560-bit exact sum is performed in this process.
+ always @* begin
+  a_nan=is_nan(ao); b_nan=is_nan(bo); z_nan=is_nan(zo);
+  a_inf=is_inf(ao); b_inf=is_inf(bo); z_inf=is_inf(zo);
+  a_zero=is_zero(ao); b_zero=is_zero(bo); z_zero=is_zero(zo);
+  product_inf=(a_inf||b_inf);
+  invalid_bit=is_snan(ao)||is_snan(bo)||is_snan(zo)||
+              ((a_zero&&b_inf)||(a_inf&&b_zero))||
+              (product_inf&&z_inf&&(product_sign!=zo[31]));
+
+  shifted=560'd0; rounded=25'd0;
+  sig24_round=24'd0; exp_field=8'd0; frac_field=23'd0;
+  sign_result=1'b0; h=0; rshift=149; exponent_unbiased=-298;
+  guard_bit=0; round_bit=0; sticky_bit=0; inexact_bit=0;
+  overflow_bit=0; underflow_bit=0;
+
+  if (a_nan) begin
+    result={ao[31],8'hff,(ao[22:0]|23'h400000)};
+  end else if (b_nan) begin
+    result={bo[31],8'hff,(bo[22:0]|23'h400000)};
+  end else if (z_nan) begin
+    result={zo[31],8'hff,(zo[22:0]|23'h400000)};
+  end else if (invalid_bit) begin
+    result=QNAN;
+  end else if (product_inf) begin
+    result={product_sign,8'hff,23'd0};
+  end else if (z_inf) begin
+    result=zo;
+  end else if (exact_zero) begin
+    sign_result=((a_zero||b_zero)&&z_zero&&(product_sign==zo[31])) ? product_sign : 1'b0;
+    result={sign_result,31'd0};
+  end else begin
+    // Hierarchical leading-one detection: 35 fixed 16-bit groups.
+    // Iterating low-to-high lets the highest nonzero group overwrite h,
+    // avoiding a 560-stage found_high_bit priority chain in Yosys.
+    h = 0;
+    for (i=0; i<35; i=i+1) begin
+      if (|abs_sum[(i*16) +: 16])
+        h = (i*16) + local_high16(abs_sum[(i*16) +: 16]);
+    end
+    exponent_unbiased=h-298;
+    if (exponent_unbiased < -126)
+      rshift=149;
+    else
+      rshift=h-23;
+    if (rshift<0) rshift=0;
+
+    shifted=abs_sum >> rshift;
+    rounded={1'b0,shifted[23:0]};
+    guard_bit=(rshift>=1) ? abs_sum[rshift-1] : 1'b0;
+    round_bit=(rshift>=2) ? abs_sum[rshift-2] : 1'b0;
+
+    // Sticky = OR(abs_sum[rshift-3:0]). Use a variable shift and reduction
+    // instead of an unrolled procedural loop with a variable condition.
+    if (rshift>=3)
+      sticky_bit = |(abs_sum << (560-(rshift-2)));
+    else
+      sticky_bit = 1'b0;
+
+    inexact_bit=guard_bit|round_bit|sticky_bit;
+    if (guard_bit && (round_bit || sticky_bit || shifted[0]))
+      rounded=rounded+25'd1;
+
+    if (exponent_unbiased < -126) begin
+      if (rounded[23])
+        result={sum_sign,8'd1,23'd0};
+      else
+        result={sum_sign,8'd0,rounded[22:0]};
+      underflow_bit=inexact_bit && (result[30:23]==0);
+    end else begin
+      if (rounded[24]) begin
+        sig24_round=rounded[24:1];
+        exponent_unbiased=exponent_unbiased+1;
+      end else begin
+        sig24_round=rounded[23:0];
+      end
+      if (exponent_unbiased>127) begin
+        overflow_bit=1'b1;
+        inexact_bit=1'b1;
+        result={sum_sign,8'hff,23'd0};
+      end else begin
+        exp_field=exponent_unbiased+127;
+        frac_field=sig24_round[22:0];
+        result={sum_sign,exp_field,frac_field};
+      end
+    end
+  end
+
+  flag_invalid=invalid_bit;
+  flag_divzero=1'b0;
+  flag_overflow=overflow_bit;
+  flag_underflow=underflow_bit;
+  flag_inexact=inexact_bit;
+ end
+endmodule

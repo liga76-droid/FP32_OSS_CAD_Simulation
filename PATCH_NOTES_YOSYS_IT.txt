@@ -1,0 +1,51 @@
+Patch Yosys — IEEE FMA RTL
+==========================
+
+File modificato:
+  rtl/fp32_fma_ieee.sv
+
+Modifica:
+  Rimosso il ciclo for procedurale con condizione variabile per sticky_bit.
+  Sostituito con una riduzione OR di abs_sum traslato a sinistra:
+    if (rshift >= 3)
+      sticky_bit = |(abs_sum << (560 - (rshift - 2)));
+    else
+      sticky_bit = 1'b0;
+
+Motivo:
+  Nel log precedente PROC_MUX generava 568 assegnazioni successive a sticky_bit
+  e migliaia di decoder. La modifica evita quel pattern RTL.
+
+Verifiche eseguite qui:
+  - Sorgente dello ZIP e file sorgente allegato erano identici prima della patch.
+  - Controllo software della formula sticky per rshift 0..559: PASS.
+  - Nessuna esecuzione Icarus/Yosys disponibile: compilazione, simulazione e
+    sintesi della patch restano da verificare sul PC con OSS CAD Suite.
+
+Comandi Windows:
+  1. run_iverilog_all.bat
+  2. run_yosys_ieee_check_corrected.bat
+
+Non dichiarare risolto il crash finché Yosys non termina e genera
+reports/fp32_fma_ieee.json e reports/yosys_ieee_stat.txt.
+
+Seconda correzione del pacchetto:
+  - run_yosys_ieee_check.bat ora richiama il controllo robusto
+    run_yosys_ieee_check_corrected.bat. In questo modo il nome storico non
+    esegue più direttamente l'audit Python se Yosys non ha generato il JSON.
+  - check_ieee_mul_count.py verifica l'esistenza e la validità del JSON e
+    stampa un errore leggibile, invece di terminare con FileNotFoundError.
+  - Questa modifica corregge la gestione dell'errore, NON risolve di per sé
+    un eventuale crash interno di Yosys. Il log Yosys resta la prova decisiva.
+
+Terza revisione candidata — leading-one detection gerarchico:
+  - Il log più recente ha superato PROC_DLATCH e OPT_MERGE, poi è crashato
+    durante OPT_MUXTREE. La precedente scansione seriale a 560 bit era una
+    sorgente plausibile di una catena prioritaria molto profonda.
+  - Sostituita la scansione con 35 gruppi fissi da 16 bit. Ogni gruppo usa
+    una funzione casez a priorità locale di 16 bit; il ciclo esterno visita
+    i gruppi dal meno significativo al più significativo, così il gruppo
+    più alto non nullo determina h senza found_high_bit globale.
+  - È una modifica mirata e plausibile, non una prova che il crash sia risolto.
+  - Non è stata eseguita sintesi Yosys in questo ambiente. Testare Icarus e
+    run_yosys_ieee_check.bat; conservare il log completo in caso di crash.

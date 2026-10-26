@@ -1,0 +1,31 @@
+PATCH CANDIDATA — separazione dei processi combinazionali
+=========================================================
+
+Obiettivo
+---------
+Ridurre il carico della passata Yosys PROC_DLATCH/PROC_MUX che in precedenza
+terminava con codice Windows 0xC00000FD (stack overflow).
+
+Modifiche a rtl/fp32_fma_ieee.sv
+--------------------------------
+1. Il calcolo finite-only a 560 bit (allineamento di prodotto e Z, segni,
+   somma esatta, valore assoluto e rilevamento dello zero) è ora in un
+   processo always @* separato.
+2. Classificazione IEEE-754, ricerca del bit più significativo, rounding e
+   flags restano in un secondo processo always @*.
+3. Il segnale product_sign è wire continuo, per non essere scritto in un
+   processo e letto nell'altro come variabile procedurale condivisa.
+4. Lo sticky bit usa una shift variabile e una riduzione OR, evitando il
+   ciclo procedurale da 560 iterazioni.
+
+Limiti
+------
+- Questa è una patch candidata, NON una correzione verificata.
+- In questo ambiente non sono disponibili gli eseguibili yosys, iverilog o
+  verilator: nessuna compilazione, simulazione o sintesi è stata eseguita.
+- La separazione dei processi mira a ridurre la complessità della conversione
+  procedurale; se il crash persiste, il prossimo passo è ridurre il datapath
+  560-bit o sostituire gli shift variabili con una rete di shift esplicita.
+- I test diretti esistenti non costituiscono da soli una prova di piena
+  conformità IEEE-754.
+- L'architettura di moltiplicazione e la pipeline non sono state ridisegnate.

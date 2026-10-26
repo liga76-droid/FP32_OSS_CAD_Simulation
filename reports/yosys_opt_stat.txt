@@ -1,0 +1,33 @@
+
+9. Printing statistics.
+
+=== fp32_fma_finite_opt ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      174 wires
+     3552 wire bits
+      126 public wires
+     2737 public wire bits
+       16 ports
+      290 port bits
+      115 cells
+        3   $add
+        6   $and
+        2   $le
+        5   $logic_and
+       12   $logic_not
+        7   $logic_or
+        1   $lt
+        4   $mul
+        9   $mux
+        3   $ne
+        2   $neg
+        4   $or
+        7   $reduce_and
+        5   $scopeinfo
+       33   $sdffe
+        2   $shl
+        5   $sub
+        5   $xor
+
