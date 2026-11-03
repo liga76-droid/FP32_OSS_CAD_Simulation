@@ -1,0 +1,5 @@
+# Generated simulation binaries
+/build/*.vvp
+
+# Temporary RTL backups
+*.sv.old*

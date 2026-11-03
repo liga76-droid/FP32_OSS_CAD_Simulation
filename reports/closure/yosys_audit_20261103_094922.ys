@@ -1,0 +1,1 @@
+read_verilog -sv rtl/alu_mul_reconfig.sv rtl/fp32_sigmul_linear4.sv rtl/fp32_fma_ieee.sv; hierarchy -check -top fp32_fma_ieee; proc; check -assert; stat; write_json reports/closure/fp32_fma_ieee_audit.json

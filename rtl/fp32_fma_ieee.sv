@@ -89,6 +89,20 @@ module fp32_fma_ieee #(parameter ID_W=16) (
    endcase
   end
  endfunction
+
+ // Combinational highest-set-bit search, isolated from the rounding process.
+ // Scan all 35 fixed 16-bit groups; the highest nonzero group wins.
+ function automatic integer highest_set_bit_560(input [559:0] value);
+  integer j;
+  begin
+   highest_set_bit_560 = 0;
+   for (j=0; j<35; j=j+1) begin
+    if (|value[(j*16) +: 16])
+      highest_set_bit_560 = (j*16) + local_high16(value[(j*16) +: 16]);
+   end
+  end
+ endfunction
+
  function automatic [559:0] sticky_mag(input [559:0] m, input integer n);
   integer k; reg s;
   begin s=0; for(k=0;k<560;k=k+1) if(k<n) s=s|m[k]; sticky_mag={559'd0,s}; end
@@ -110,7 +124,6 @@ module fp32_fma_ieee #(parameter ID_W=16) (
  reg invalid_bit, overflow_bit, underflow_bit;
  reg a_nan,b_nan,z_nan,a_inf,b_inf,z_inf,a_zero,b_zero,z_zero;
  reg product_inf, exact_zero;
- integer i;
  wire product_sign = ao[31] ^ bo[31];
 
  // PROCESS 1: exact finite arithmetic only. Keeping this process independent
@@ -177,13 +190,9 @@ module fp32_fma_ieee #(parameter ID_W=16) (
     result={sign_result,31'd0};
   end else begin
     // Hierarchical leading-one detection: 35 fixed 16-bit groups.
-    // Iterating low-to-high lets the highest nonzero group overwrite h,
-    // avoiding a 560-stage found_high_bit priority chain in Yosys.
-    h = 0;
-    for (i=0; i<35; i=i+1) begin
-      if (|abs_sum[(i*16) +: 16])
-        h = (i*16) + local_high16(abs_sum[(i*16) +: 16]);
-    end
+    // The search is isolated in an automatic function so its loop index
+    // is not inferred as state in this combinational process.
+    h = highest_set_bit_560(abs_sum);
     exponent_unbiased=h-298;
     if (exponent_unbiased < -126)
       rshift=149;
