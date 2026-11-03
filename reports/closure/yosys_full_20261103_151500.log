@@ -1,0 +1,1158 @@
+
+-- Executing script file `C:\Users\road7\Documents\Progettazione_ALU\FP32_OSS_CAD_Simulation\reports\closure\yosys_audit_20261103_151500.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/alu_mul_reconfig.sv
+Parsing SystemVerilog input from `rtl/alu_mul_reconfig.sv' to AST representation.
+Generating RTLIL representation for module `\alu_mul_reconfig'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/fp32_sigmul_linear4.sv
+Parsing SystemVerilog input from `rtl/fp32_sigmul_linear4.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_sigmul_linear4'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/fp32_fma_ieee.sv
+Parsing SystemVerilog input from `rtl/fp32_fma_ieee.sv' to AST representation.
+Generating RTLIL representation for module `\fp32_fma_ieee'.
+Successfully finished Verilog frontend.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \fp32_fma_ieee
+Used module:     \fp32_sigmul_linear4
+Used module:         \alu_mul_reconfig
+Parameter \ID_W = 16
+
+4.2. Executing AST frontend in derive mode using pre-parsed AST for module `\fp32_sigmul_linear4'.
+Parameter \ID_W = 16
+Generating RTLIL representation for module `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000'.
+
+4.3. Analyzing design hierarchy..
+Top module:  \fp32_fma_ieee
+Used module:     $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000
+Used module:         \alu_mul_reconfig
+
+4.4. Analyzing design hierarchy..
+Top module:  \fp32_fma_ieee
+Used module:     $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000
+Used module:         \alu_mul_reconfig
+Removing unused module `\fp32_sigmul_linear4'.
+Removed 1 unused modules.
+
+5. Executing PROC pass (convert processes to netlists).
+
+5.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 85 switch rules as full_case in process $proc$rtl/fp32_fma_ieee.sv:161$142 in module fp32_fma_ieee.
+Marked 8 switch rules as full_case in process $proc$rtl/fp32_fma_ieee.sv:131$104 in module fp32_fma_ieee.
+Marked 1 switch rules as full_case in process $proc$rtl/fp32_fma_ieee.sv:36$100 in module fp32_fma_ieee.
+Marked 1 switch rules as full_case in process $proc$rtl/fp32_sigmul_linear4.sv:46$1076 in module $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.
+Removed a total of 0 dead cases.
+
+5.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 155 assignments to connections.
+
+5.4. Executing PROC_INIT pass (extract init attributes).
+
+5.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~110 debug messages>
+
+5.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+     1/783: $10\result[31:0]
+     2/783: $9\inexact_bit[0:0]
+     3/783: $9\overflow_bit[0:0]
+     4/783: $9\frac_field[22:0]
+     5/783: $9\exp_field[7:0]
+     6/783: $9\exponent_unbiased[31:0]
+     7/783: $9\sig24_round[23:0]
+     8/783: $9\result[31:0]
+     9/783: $8\underflow_bit[0:0]
+    10/783: $8\result[31:0]
+    11/783: $8\overflow_bit[0:0]
+    12/783: $8\inexact_bit[0:0]
+    13/783: $8\exponent_unbiased[31:0]
+    14/783: $8\frac_field[22:0]
+    15/783: $8\exp_field[7:0]
+    16/783: $8\sig24_round[23:0]
+    17/783: $8\rounded[24:0]
+    18/783: $8\sticky_bit[0:0]
+    19/783: $9\rshift[31:0]
+    20/783: $8\rshift[31:0]
+    21/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$1020
+    22/783: $42\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$1017
+    23/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$1018
+    24/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$1019
+    25/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$1014
+    26/783: $41\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$1011
+    27/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$1012
+    28/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$1013
+    29/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$1008
+    30/783: $40\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$1005
+    31/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$1006
+    32/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$1007
+    33/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$1002
+    34/783: $39\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$999
+    35/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$1000
+    36/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$1001
+    37/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$996
+    38/783: $38\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$993
+    39/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$994
+    40/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$995
+    41/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$990
+    42/783: $37\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$987
+    43/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$988
+    44/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$989
+    45/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$984
+    46/783: $36\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$981
+    47/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$982
+    48/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$983
+    49/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$978
+    50/783: $35\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$975
+    51/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$976
+    52/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$977
+    53/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$972
+    54/783: $34\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$969
+    55/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$970
+    56/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$971
+    57/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$966
+    58/783: $33\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$963
+    59/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$964
+    60/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$965
+    61/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$960
+    62/783: $32\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$957
+    63/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$958
+    64/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$959
+    65/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$954
+    66/783: $31\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$951
+    67/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$952
+    68/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$953
+    69/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$948
+    70/783: $30\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$945
+    71/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$946
+    72/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$947
+    73/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$942
+    74/783: $29\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$939
+    75/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$940
+    76/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$941
+    77/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$936
+    78/783: $28\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$933
+    79/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$934
+    80/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$935
+    81/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$930
+    82/783: $27\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$927
+    83/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$928
+    84/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$929
+    85/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$924
+    86/783: $26\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$921
+    87/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$922
+    88/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$923
+    89/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$918
+    90/783: $25\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$915
+    91/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$916
+    92/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$917
+    93/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$912
+    94/783: $24\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$909
+    95/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$910
+    96/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$911
+    97/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$906
+    98/783: $23\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$903
+    99/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$904
+   100/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$905
+   101/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$900
+   102/783: $22\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$897
+   103/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$898
+   104/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$899
+   105/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$894
+   106/783: $21\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$891
+   107/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$892
+   108/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$893
+   109/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$888
+   110/783: $20\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$885
+   111/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$886
+   112/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$887
+   113/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$882
+   114/783: $19\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$879
+   115/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$880
+   116/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$881
+   117/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$876
+   118/783: $18\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$873
+   119/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$874
+   120/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$875
+   121/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$870
+   122/783: $17\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$867
+   123/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$868
+   124/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$869
+   125/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$864
+   126/783: $16\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$861
+   127/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$862
+   128/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$863
+   129/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$858
+   130/783: $15\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$855
+   131/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$856
+   132/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$857
+   133/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$852
+   134/783: $14\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$849
+   135/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$850
+   136/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$851
+   137/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$846
+   138/783: $13\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$843
+   139/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$844
+   140/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$845
+   141/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$840
+   142/783: $12\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$837
+   143/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$838
+   144/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$839
+   145/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$834
+   146/783: $11\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$831
+   147/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$832
+   148/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$833
+   149/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$828
+   150/783: $10\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$825
+   151/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$826
+   152/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$827
+   153/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$822
+   154/783: $9\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$819
+   155/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$820
+   156/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$821
+   157/783: $9\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$816
+   158/783: $8\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$813
+   159/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$814
+   160/783: $8\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$815
+   161/783: $7\result[31:0]
+   162/783: $7\sign_result[0:0]
+   163/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$806
+   164/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$805
+   165/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$804
+   166/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$803
+   167/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$802
+   168/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$801
+   169/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$800
+   170/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$799
+   171/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$798
+   172/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$797
+   173/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$796
+   174/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$795
+   175/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$794
+   176/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$793
+   177/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$792
+   178/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$791
+   179/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$790
+   180/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$789
+   181/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$788
+   182/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$787
+   183/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$786
+   184/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$785
+   185/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$784
+   186/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$783
+   187/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$782
+   188/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$781
+   189/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$780
+   190/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$779
+   191/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$778
+   192/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$777
+   193/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$776
+   194/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$775
+   195/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$774
+   196/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$773
+   197/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$772
+   198/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$771
+   199/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$770
+   200/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$769
+   201/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$768
+   202/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$767
+   203/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$766
+   204/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$765
+   205/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$764
+   206/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$763
+   207/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$762
+   208/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$761
+   209/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$760
+   210/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$759
+   211/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$758
+   212/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$757
+   213/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$756
+   214/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$755
+   215/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$754
+   216/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$753
+   217/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$752
+   218/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$751
+   219/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$750
+   220/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$749
+   221/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$748
+   222/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$747
+   223/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$746
+   224/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$745
+   225/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$744
+   226/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$743
+   227/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$742
+   228/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$741
+   229/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$740
+   230/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$739
+   231/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$738
+   232/783: $7\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$737
+   233/783: $7\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$736
+   234/783: $7\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$735
+   235/783: $7\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$734
+   236/783: $7\underflow_bit[0:0]
+   237/783: $7\overflow_bit[0:0]
+   238/783: $7\inexact_bit[0:0]
+   239/783: $7\sticky_bit[0:0]
+   240/783: $7\round_bit[0:0]
+   241/783: $7\guard_bit[0:0]
+   242/783: $7\exponent_unbiased[31:0]
+   243/783: $7\rshift[31:0]
+   244/783: $7\h[31:0]
+   245/783: $7\frac_field[22:0]
+   246/783: $7\exp_field[7:0]
+   247/783: $7\sig24_round[23:0]
+   248/783: $7\rounded[24:0]
+   249/783: $7\shifted[559:0]
+   250/783: $6\result[31:0]
+   251/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$733
+   252/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$732
+   253/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$731
+   254/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$730
+   255/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$729
+   256/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$728
+   257/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$727
+   258/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$726
+   259/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$725
+   260/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$724
+   261/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$723
+   262/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$722
+   263/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$721
+   264/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$720
+   265/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$719
+   266/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$718
+   267/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$717
+   268/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$716
+   269/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$715
+   270/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$714
+   271/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$713
+   272/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$712
+   273/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$711
+   274/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$710
+   275/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$709
+   276/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$708
+   277/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$707
+   278/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$706
+   279/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$705
+   280/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$704
+   281/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$703
+   282/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$702
+   283/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$701
+   284/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$700
+   285/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$699
+   286/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$698
+   287/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$697
+   288/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$696
+   289/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$695
+   290/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$694
+   291/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$693
+   292/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$692
+   293/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$691
+   294/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$690
+   295/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$689
+   296/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$688
+   297/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$687
+   298/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$686
+   299/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$685
+   300/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$684
+   301/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$683
+   302/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$682
+   303/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$681
+   304/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$680
+   305/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$679
+   306/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$678
+   307/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$677
+   308/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$676
+   309/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$675
+   310/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$674
+   311/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$673
+   312/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$672
+   313/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$671
+   314/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$670
+   315/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$669
+   316/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$668
+   317/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$667
+   318/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$666
+   319/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$665
+   320/783: $6\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$664
+   321/783: $6\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$663
+   322/783: $6\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$662
+   323/783: $6\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$661
+   324/783: $6\underflow_bit[0:0]
+   325/783: $6\overflow_bit[0:0]
+   326/783: $6\inexact_bit[0:0]
+   327/783: $6\sticky_bit[0:0]
+   328/783: $6\round_bit[0:0]
+   329/783: $6\guard_bit[0:0]
+   330/783: $6\exponent_unbiased[31:0]
+   331/783: $6\rshift[31:0]
+   332/783: $6\h[31:0]
+   333/783: $6\sign_result[0:0]
+   334/783: $6\frac_field[22:0]
+   335/783: $6\exp_field[7:0]
+   336/783: $6\sig24_round[23:0]
+   337/783: $6\rounded[24:0]
+   338/783: $6\shifted[559:0]
+   339/783: $5\result[31:0]
+   340/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$660
+   341/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$659
+   342/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$658
+   343/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$657
+   344/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$656
+   345/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$655
+   346/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$654
+   347/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$653
+   348/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$652
+   349/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$651
+   350/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$650
+   351/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$649
+   352/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$648
+   353/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$647
+   354/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$646
+   355/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$645
+   356/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$644
+   357/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$643
+   358/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$642
+   359/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$641
+   360/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$640
+   361/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$639
+   362/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$638
+   363/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$637
+   364/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$636
+   365/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$635
+   366/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$634
+   367/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$633
+   368/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$632
+   369/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$631
+   370/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$630
+   371/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$629
+   372/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$628
+   373/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$627
+   374/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$626
+   375/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$625
+   376/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$624
+   377/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$623
+   378/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$622
+   379/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$621
+   380/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$620
+   381/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$619
+   382/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$618
+   383/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$617
+   384/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$616
+   385/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$615
+   386/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$614
+   387/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$613
+   388/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$612
+   389/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$611
+   390/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$610
+   391/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$609
+   392/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$608
+   393/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$607
+   394/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$606
+   395/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$605
+   396/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$604
+   397/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$603
+   398/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$602
+   399/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$601
+   400/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$600
+   401/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$599
+   402/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$598
+   403/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$597
+   404/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$596
+   405/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$595
+   406/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$594
+   407/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$593
+   408/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$592
+   409/783: $5\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$591
+   410/783: $5\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$590
+   411/783: $5\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$589
+   412/783: $5\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$588
+   413/783: $5\underflow_bit[0:0]
+   414/783: $5\overflow_bit[0:0]
+   415/783: $5\inexact_bit[0:0]
+   416/783: $5\sticky_bit[0:0]
+   417/783: $5\round_bit[0:0]
+   418/783: $5\guard_bit[0:0]
+   419/783: $5\exponent_unbiased[31:0]
+   420/783: $5\rshift[31:0]
+   421/783: $5\h[31:0]
+   422/783: $5\sign_result[0:0]
+   423/783: $5\frac_field[22:0]
+   424/783: $5\exp_field[7:0]
+   425/783: $5\sig24_round[23:0]
+   426/783: $5\rounded[24:0]
+   427/783: $5\shifted[559:0]
+   428/783: $4\result[31:0]
+   429/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$587
+   430/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$586
+   431/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$585
+   432/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$584
+   433/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$583
+   434/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$582
+   435/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$581
+   436/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$580
+   437/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$579
+   438/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$578
+   439/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$577
+   440/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$576
+   441/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$575
+   442/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$574
+   443/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$573
+   444/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$572
+   445/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$571
+   446/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$570
+   447/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$569
+   448/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$568
+   449/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$567
+   450/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$566
+   451/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$565
+   452/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$564
+   453/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$563
+   454/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$562
+   455/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$561
+   456/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$560
+   457/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$559
+   458/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$558
+   459/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$557
+   460/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$556
+   461/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$555
+   462/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$554
+   463/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$553
+   464/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$552
+   465/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$551
+   466/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$550
+   467/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$549
+   468/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$548
+   469/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$547
+   470/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$546
+   471/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$545
+   472/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$544
+   473/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$543
+   474/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$542
+   475/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$541
+   476/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$540
+   477/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$539
+   478/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$538
+   479/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$537
+   480/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$536
+   481/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$535
+   482/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$534
+   483/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$533
+   484/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$532
+   485/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$531
+   486/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$530
+   487/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$529
+   488/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$528
+   489/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$527
+   490/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$526
+   491/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$525
+   492/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$524
+   493/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$523
+   494/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$522
+   495/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$521
+   496/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$520
+   497/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$519
+   498/783: $4\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$518
+   499/783: $4\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$517
+   500/783: $4\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$516
+   501/783: $4\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$515
+   502/783: $4\underflow_bit[0:0]
+   503/783: $4\overflow_bit[0:0]
+   504/783: $4\inexact_bit[0:0]
+   505/783: $4\sticky_bit[0:0]
+   506/783: $4\round_bit[0:0]
+   507/783: $4\guard_bit[0:0]
+   508/783: $4\exponent_unbiased[31:0]
+   509/783: $4\rshift[31:0]
+   510/783: $4\h[31:0]
+   511/783: $4\sign_result[0:0]
+   512/783: $4\frac_field[22:0]
+   513/783: $4\exp_field[7:0]
+   514/783: $4\sig24_round[23:0]
+   515/783: $4\rounded[24:0]
+   516/783: $4\shifted[559:0]
+   517/783: $3\result[31:0]
+   518/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$513
+   519/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$512
+   520/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$511
+   521/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$510
+   522/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$509
+   523/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$508
+   524/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$507
+   525/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$506
+   526/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$505
+   527/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$504
+   528/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$503
+   529/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$502
+   530/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$501
+   531/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$500
+   532/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$499
+   533/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$498
+   534/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$497
+   535/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$496
+   536/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$495
+   537/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$494
+   538/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$493
+   539/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$492
+   540/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$491
+   541/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$490
+   542/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$489
+   543/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$488
+   544/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$487
+   545/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$486
+   546/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$485
+   547/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$484
+   548/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$483
+   549/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$482
+   550/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$481
+   551/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$480
+   552/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$479
+   553/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$478
+   554/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$477
+   555/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$476
+   556/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$475
+   557/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$474
+   558/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$473
+   559/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$472
+   560/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$471
+   561/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$470
+   562/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$469
+   563/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$468
+   564/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$467
+   565/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$466
+   566/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$465
+   567/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$464
+   568/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$463
+   569/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$462
+   570/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$461
+   571/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$460
+   572/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$459
+   573/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$458
+   574/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$457
+   575/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$456
+   576/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$455
+   577/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$454
+   578/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$453
+   579/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$452
+   580/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$451
+   581/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$450
+   582/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$449
+   583/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$448
+   584/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$447
+   585/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$446
+   586/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$445
+   587/783: $3\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$444
+   588/783: $3\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$443
+   589/783: $3\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$442
+   590/783: $3\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$441
+   591/783: $3\underflow_bit[0:0]
+   592/783: $3\overflow_bit[0:0]
+   593/783: $3\inexact_bit[0:0]
+   594/783: $3\sticky_bit[0:0]
+   595/783: $3\round_bit[0:0]
+   596/783: $3\guard_bit[0:0]
+   597/783: $3\exponent_unbiased[31:0]
+   598/783: $3\rshift[31:0]
+   599/783: $3\h[31:0]
+   600/783: $3\sign_result[0:0]
+   601/783: $3\frac_field[22:0]
+   602/783: $3\exp_field[7:0]
+   603/783: $3\sig24_round[23:0]
+   604/783: $3\rounded[24:0]
+   605/783: $3\shifted[559:0]
+   606/783: $2\result[31:0]
+   607/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$439
+   608/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$438
+   609/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$437
+   610/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$436
+   611/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$435
+   612/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$434
+   613/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$433
+   614/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$432
+   615/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$431
+   616/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$430
+   617/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$429
+   618/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$428
+   619/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$427
+   620/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$426
+   621/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$425
+   622/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$424
+   623/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$423
+   624/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$422
+   625/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$421
+   626/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$420
+   627/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$419
+   628/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$418
+   629/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$417
+   630/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$416
+   631/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$415
+   632/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$414
+   633/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$413
+   634/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$412
+   635/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$411
+   636/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$410
+   637/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$409
+   638/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$408
+   639/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$407
+   640/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$406
+   641/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$405
+   642/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$404
+   643/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$403
+   644/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$402
+   645/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$401
+   646/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$400
+   647/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$399
+   648/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$398
+   649/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$397
+   650/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$396
+   651/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$395
+   652/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$394
+   653/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$393
+   654/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$392
+   655/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$391
+   656/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$390
+   657/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$389
+   658/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$388
+   659/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$387
+   660/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$386
+   661/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$385
+   662/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$384
+   663/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$383
+   664/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$382
+   665/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$381
+   666/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$380
+   667/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$379
+   668/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$378
+   669/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$377
+   670/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$376
+   671/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$375
+   672/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$374
+   673/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$373
+   674/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$372
+   675/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$371
+   676/783: $2\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$370
+   677/783: $2\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$369
+   678/783: $2\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$368
+   679/783: $2\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$367
+   680/783: $2\underflow_bit[0:0]
+   681/783: $2\overflow_bit[0:0]
+   682/783: $2\inexact_bit[0:0]
+   683/783: $2\sticky_bit[0:0]
+   684/783: $2\round_bit[0:0]
+   685/783: $2\guard_bit[0:0]
+   686/783: $2\exponent_unbiased[31:0]
+   687/783: $2\rshift[31:0]
+   688/783: $2\h[31:0]
+   689/783: $2\sign_result[0:0]
+   690/783: $2\frac_field[22:0]
+   691/783: $2\exp_field[7:0]
+   692/783: $2\sig24_round[23:0]
+   693/783: $2\rounded[24:0]
+   694/783: $2\shifted[559:0]
+   695/783: $1\result[31:0]
+   696/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.x[15:0]$365
+   697/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$87.$result[3:0]$364
+   698/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.x[15:0]$363
+   699/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$86.$result[3:0]$362
+   700/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.x[15:0]$361
+   701/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$85.$result[3:0]$360
+   702/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.x[15:0]$359
+   703/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$84.$result[3:0]$358
+   704/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.x[15:0]$357
+   705/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$83.$result[3:0]$356
+   706/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.x[15:0]$355
+   707/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$82.$result[3:0]$354
+   708/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.x[15:0]$353
+   709/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$81.$result[3:0]$352
+   710/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.x[15:0]$351
+   711/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$80.$result[3:0]$350
+   712/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.x[15:0]$349
+   713/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$79.$result[3:0]$348
+   714/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.x[15:0]$347
+   715/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$78.$result[3:0]$346
+   716/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.x[15:0]$345
+   717/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$77.$result[3:0]$344
+   718/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.x[15:0]$343
+   719/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$76.$result[3:0]$342
+   720/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.x[15:0]$341
+   721/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$75.$result[3:0]$340
+   722/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.x[15:0]$339
+   723/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$74.$result[3:0]$338
+   724/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.x[15:0]$337
+   725/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$73.$result[3:0]$336
+   726/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.x[15:0]$335
+   727/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$72.$result[3:0]$334
+   728/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.x[15:0]$333
+   729/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$71.$result[3:0]$332
+   730/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.x[15:0]$331
+   731/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$70.$result[3:0]$330
+   732/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.x[15:0]$329
+   733/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$69.$result[3:0]$328
+   734/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.x[15:0]$327
+   735/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$68.$result[3:0]$326
+   736/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.x[15:0]$325
+   737/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$67.$result[3:0]$324
+   738/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.x[15:0]$323
+   739/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$66.$result[3:0]$322
+   740/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.x[15:0]$321
+   741/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$65.$result[3:0]$320
+   742/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.x[15:0]$319
+   743/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$64.$result[3:0]$318
+   744/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.x[15:0]$317
+   745/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$63.$result[3:0]$316
+   746/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.x[15:0]$315
+   747/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$62.$result[3:0]$314
+   748/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.x[15:0]$313
+   749/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$61.$result[3:0]$312
+   750/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.x[15:0]$311
+   751/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$60.$result[3:0]$310
+   752/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.x[15:0]$309
+   753/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$59.$result[3:0]$308
+   754/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.x[15:0]$307
+   755/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$58.$result[3:0]$306
+   756/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.x[15:0]$305
+   757/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$57.$result[3:0]$304
+   758/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.x[15:0]$303
+   759/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$56.$result[3:0]$302
+   760/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.x[15:0]$301
+   761/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$55.$result[3:0]$300
+   762/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.x[15:0]$299
+   763/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$54.$result[3:0]$298
+   764/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.x[15:0]$297
+   765/783: $1\local_high16$func$rtl/fp32_fma_ieee.sv:101$53.$result[3:0]$296
+   766/783: $1\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.j[31:0]$295
+   767/783: $1\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.value[559:0]$294
+   768/783: $1\highest_set_bit_560$func$rtl/fp32_fma_ieee.sv:195$52.$result[31:0]$293
+   769/783: $1\underflow_bit[0:0]
+   770/783: $1\overflow_bit[0:0]
+   771/783: $1\inexact_bit[0:0]
+   772/783: $1\sticky_bit[0:0]
+   773/783: $1\round_bit[0:0]
+   774/783: $1\guard_bit[0:0]
+   775/783: $1\exponent_unbiased[31:0]
+   776/783: $1\rshift[31:0]
+   777/783: $1\h[31:0]
+   778/783: $1\sign_result[0:0]
+   779/783: $1\frac_field[22:0]
+   780/783: $1\exp_field[7:0]
+   781/783: $1\sig24_round[23:0]
+   782/783: $1\rounded[24:0]
+   783/783: $1\shifted[559:0]
+Creating decoders for process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+     1/10: $1\abs_sum[559:0]
+     2/10: $1\z_signed[559:0]
+     3/10: $1\p_signed[559:0]
+     4/10: $1\z_mag[559:0]
+     5/10: $1\sig24$func$rtl/fp32_fma_ieee.sv:141$36.$result[23:0]$132
+     6/10: $1\sig24$func$rtl/fp32_fma_ieee.sv:141$36.x[31:0]$133
+     7/10: $1\p_mag[559:0]
+     8/10: $1\lsb_exp$func$rtl/fp32_fma_ieee.sv:133$35.$result[10:0]$121
+     9/10: $1\lsb_exp$func$rtl/fp32_fma_ieee.sv:132$34.$result[10:0]$117
+    10/10: $1\lsb_exp$func$rtl/fp32_fma_ieee.sv:132$33.$result[10:0]$114
+Creating decoders for process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+     1/15: $0\zo[31:0]
+     2/15: $0\bo[31:0]
+     3/15: $0\ao[31:0]
+     4/15: $0\z2[31:0]
+     5/15: $0\z1[31:0]
+     6/15: $0\z0[31:0]
+     7/15: $0\b2[31:0]
+     8/15: $0\b1[31:0]
+     9/15: $0\a2[31:0]
+    10/15: $0\a1[31:0]
+    11/15: $0\b0[31:0]
+    12/15: $0\a0[31:0]
+    13/15: $0\v2[0:0]
+    14/15: $0\v1[0:0]
+    15/15: $0\v0[0:0]
+Creating decoders for process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+     1/18: $0\p_ll2[15:0]
+     2/18: $0\csa_carry2[47:0]
+     3/18: $0\csa_sum2[47:0]
+     4/18: $0\p_ll1[15:0]
+     5/18: $0\p_lh1[23:0]
+     6/18: $0\p_hl1[23:0]
+     7/18: $0\p_hh1[31:0]
+     8/18: $0\b0[23:0]
+     9/18: $0\a0[23:0]
+    10/18: $0\id2[15:0]
+    11/18: $0\id1[15:0]
+    12/18: $0\id0[15:0]
+    13/18: $0\v2[0:0]
+    14/18: $0\v1[0:0]
+    15/18: $0\v0[0:0]
+    16/18: $0\out_id[15:0]
+    17/18: $0\out_valid[0:0]
+    18/18: $0\product[47:0]
+
+5.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fp32_fma_ieee.\result' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\flag_invalid' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\flag_divzero' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\flag_overflow' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\flag_underflow' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\flag_inexact' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\shifted' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\rounded' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\sig24_round' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\exp_field' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\frac_field' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\sign_result' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\h' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\rshift' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\exponent_unbiased' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\guard_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\round_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\sticky_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\inexact_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\invalid_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\overflow_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\underflow_bit' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\a_nan' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\b_nan' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\z_nan' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\a_inf' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\b_inf' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\z_inf' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\a_zero' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\b_zero' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\z_zero' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\product_inf' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+No latch inferred for signal `\fp32_fma_ieee.\p_mag' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\z_mag' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\p_signed' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\z_signed' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\exact_sum' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\abs_sum' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\sum_sign' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\ep' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\ez' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\pshift' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\zshift' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+No latch inferred for signal `\fp32_fma_ieee.\exact_zero' from process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+
+5.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fp32_fma_ieee.\v0' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13290' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\v1' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13291' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\v2' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13292' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\a0' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13293' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\b0' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13294' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\a1' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13295' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\a2' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13296' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\b1' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13297' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\b2' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13298' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\z0' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13299' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\z1' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13300' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\z2' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13301' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\ao' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13302' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\bo' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13303' with positive edge clock.
+Creating register for signal `\fp32_fma_ieee.\zo' using process `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+  created $dff cell `$procdff$13304' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\product' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13305' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\out_valid' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13306' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\out_id' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13307' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\v0' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13308' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\v1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13309' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\v2' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13310' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\id0' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13311' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\id1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13312' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\id2' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13313' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\a0' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13314' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\b0' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13315' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\p_hh1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13316' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\p_hl1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13317' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\p_lh1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13318' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\p_ll1' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13319' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\csa_sum2' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13320' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\csa_carry2' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13321' with positive edge clock.
+Creating register for signal `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.\p_ll2' using process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+  created $dff cell `$procdff$13322' with positive edge clock.
+
+5.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 85 empty switches in `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+Removing empty process `fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:161$142'.
+Found and cleaned up 8 empty switches in `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+Removing empty process `fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:131$104'.
+Found and cleaned up 8 empty switches in `\fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+Removing empty process `fp32_fma_ieee.$proc$rtl/fp32_fma_ieee.sv:36$100'.
+Found and cleaned up 9 empty switches in `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+Removing empty process `$paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.$proc$rtl/fp32_sigmul_linear4.sv:46$1076'.
+Cleaned up 110 empty switches.
+
+5.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fp32_fma_ieee.
+<suppressed ~38 debug messages>
+Optimizing module $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000.
+<suppressed ~20 debug messages>
+Optimizing module alu_mul_reconfig.
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module fp32_fma_ieee...
+Checking module $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000...
+Checking module alu_mul_reconfig...
+Found and reported 0 problems.
+
+7. Printing statistics.
+
+=== fp32_fma_ieee ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     9567 wires
+   125755 wire bits
+      192 public wires
+     6925 public wire bits
+       17 ports
+      171 port bits
+     4560 cells
+       42   $add
+       15   $dff
+      500   $eq
+        5   $ge
+        1   $gt
+       23   $logic_and
+       22   $logic_not
+       13   $logic_or
+        5   $lt
+     3835   $mux
+        1   $ne
+        3   $neg
+        2   $or
+       35   $pmux
+        6   $reduce_bool
+       36   $reduce_or
+        2   $shiftx
+        3   $shl
+        1   $shr
+        9   $sub
+        1   $xor
+        1 submodules
+        1   $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000
+
+=== $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      187 wires
+     3364 wire bits
+       43 public wires
+     1005 public wire bits
+       11 ports
+      134 port bits
+       92 cells
+        1   $add
+        6   $and
+       18   $dff
+        5   $logic_not
+        4   $logic_or
+       50   $mux
+        4   $or
+        4   $xor
+        4 submodules
+        4   alu_mul_reconfig
+
+=== alu_mul_reconfig ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        9 wires
+      161 wire bits
+        6 public wires
+       97 public wire bits
+        4 ports
+       65 port bits
+        3 cells
+        1   $mul
+        2   $mux
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     4664 fp32_fma_ieee
+       92 $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000
+        3   alu_mul_reconfig
+
+        +----------Count including submodules.
+        | 
+     9790 wires
+   129763 wire bits
+      259 public wires
+     8318 public wire bits
+       44 ports
+      565 port bits
+        - memories
+        - memory bits
+        - processes
+     4664 cells
+       43   $add
+        6   $and
+       33   $dff
+      500   $eq
+        5   $ge
+        1   $gt
+       23   $logic_and
+       27   $logic_not
+       17   $logic_or
+        5   $lt
+        4   $mul
+     3893   $mux
+        1   $ne
+        3   $neg
+        6   $or
+       35   $pmux
+        6   $reduce_bool
+       36   $reduce_or
+        2   $shiftx
+        3   $shl
+        1   $shr
+        9   $sub
+        5   $xor
+        1 submodules
+        1   $paramod\fp32_sigmul_linear4\ID_W=s32'00000000000000000000000000010000
+
+8. Executing JSON backend.
